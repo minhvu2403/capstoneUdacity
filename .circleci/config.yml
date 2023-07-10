@@ -119,6 +119,8 @@ jobs:
             
             echo "DOCKER_IMAGE: $DOCKER_IMAGE"
             echo "LABEL_VERSION: $LABEL_VERSION"
+            echo "DOCKER_HUB_ID: $DOCKER_HUB_ID"
+            echo "DOCKER_REPOSITORY: $DOCKER_REPOSITORY"
             
             envsubst < k8s/deployment.yaml | kubectl apply --filename -
             
