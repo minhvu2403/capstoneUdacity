@@ -68,7 +68,7 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make lint
-            make eks-create-cluster
+            # make eks-create-cluster
 
   build-and-push-docker-image:
     docker:
