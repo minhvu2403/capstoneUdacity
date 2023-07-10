@@ -2,8 +2,8 @@
 # This file tags and uploads an image to Docker Hub
 
 # Assumes that an image is built via `run_docker.sh`
-DOCKER_HUB_ID="thanhnhan1991"
-DOCKER_REPOSITORY="capstone-app"
+DOCKER_HUB_ID="huynhlongploc"
+DOCKER_REPOSITORY="capstone_project"
 VERSION="1.0"
 
 # Step 1:
