@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER_NAME="huynhlongploc/capstone_project"
+CONTAINER_NAME="vuvm1/capstone_project"
 VERSION=1.0
 CONTAINER_PORT=80
 HOST_PORT=80
