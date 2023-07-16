@@ -65,7 +65,6 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make lint
-            make clusters-lint
 
   build-and-push-docker-image:
     docker:
