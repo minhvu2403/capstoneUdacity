@@ -77,17 +77,17 @@ jobs:
           name: Build and push docker image
           command: |
             export VERSION=$(<app/version.txt)
-            
+
             # Build docker image
             docker build -t udacity-capstone-project app
-            
+
             # Tag image
             docker tag udacity-capstone-project ${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
             docker tag udacity-capstone-project ${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:lastest
-            
+
             # Login to docker-hub
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            
+
             # We publish two images with different version tags: 
             # - numbered version
             # - "latest"
@@ -101,7 +101,7 @@ jobs:
       - checkout
       - install-awscli-gettext
       - install-aws-iam-authenticator
-      - install-kubectl      
+      - install-kubectl
       - run:
           name: Connect to cluster
           command: |
@@ -112,14 +112,14 @@ jobs:
             export VERSION=$(<app/version.txt)
             export DOCKER_IMAGE=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
             export LABEL_VERSION=${VERSION/./-}
-            
+
             echo "DOCKER_IMAGE: $DOCKER_IMAGE"
             echo "LABEL_VERSION: $LABEL_VERSION"
             echo "DOCKER_HUB_ID: $DOCKER_HUB_ID"
             echo "DOCKER_REPOSITORY: $DOCKER_REPOSITORY"
-            
+
             envsubst < k8s/deployment.yaml | kubectl apply --filename -
-            
+
             # service-green.yaml creates the udacity-capstone-project-green service
             envsubst < k8s/service-green.yaml | kubectl apply --filename -
 
@@ -174,7 +174,7 @@ jobs:
             export VERSION=$(<app/version.txt)
             export LABEL_VERSION=${VERSION/./-}
             echo "LABEL_VERSION: $LABEL_VERSION"
-            
+
             # Remove the udacity-capstone-project-x-x deployment
             for deploy in $(kubectl get deployments -o jsonpath="{.items[*].metadata.name}" | grep udacity-capstone-project);
             do
@@ -183,7 +183,7 @@ jobs:
                 kubectl delete deployments $deploy
               fi
             done
-            
+
             # Remove the udacity-capstone-project-green service
             if kubectl get services | grep udacity-capstone-project-green;
             then
